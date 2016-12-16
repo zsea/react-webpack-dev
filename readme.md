@@ -8,6 +8,7 @@
 * ES6
 * sass
 * postcss
+* npm-install-webpack-plugin *自动安装依赖的npm包*
 
 ### loaders
 
