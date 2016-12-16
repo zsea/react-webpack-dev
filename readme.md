@@ -41,8 +41,11 @@
 ### 快速开始
 
 使用以下命令快速帮你开始搭建开发环境：
+
 1. `git clone https://github.com/zsea/react-webpack-dev.git [dist]`    *//dist为你在本地所需要命名用的目录，为的话使用仓库名称。*
+
 2. `cd dist`  *//进入刚才生成的目录*
+
 3. 若你的开发环境不使用git进行管理，可以直接删除`.git`目录，若你只使用本地仓库，可以移除远程仓库：`git remote rm origin`，若你要把代码push到自己的远程仓库，可以修改远程仓库地址：`git remote set-url git@localhost:/srv/**.git`。
 
 **设置完后，你可以使用`git push`命令。**
