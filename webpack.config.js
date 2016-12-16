@@ -10,7 +10,9 @@ for (var i = 0; i < process.argv.length; i++) {
 var plugins = [new HtmlwebpackPlugin({
     title: 'Hello React',
     template: path.resolve(__dirname, 'templates/index.ejs'),
-    inject: 'head'
+    inject: 'head',
+    hash:true,
+    //favicon:'' //指定favicon.ico的位置
 })];
 
 if (minimize) {
@@ -32,13 +34,18 @@ var config = {
     },
     module: {
         loaders: [
+            { test: /\.css$/, loader: "style!css?sourceMap!postcss", include: path.resolve(__dirname, 'src') },
+            { test: /\.less$/, loader: "style!css!less!postcss", include: path.resolve(__dirname, 'src') },
+            { test: /\.sass$/, loader: "style!css!sass!postcss", include: path.resolve(__dirname, 'src') },
+            { test: /\.(jpg|png|gif)$/, loader: "url?limit=8192", include: path.resolve(__dirname, 'src') },
             {
-                test: /\.less$/,
-                loaders: ['style', 'css', 'less'],
-                include: path.resolve(__dirname, 'src')
+                test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+                loader: 'file', include: path.resolve(__dirname, 'src')
             },
+            {test: /\.json$/,loader: 'json'},
+            { test: /\.html$/,loader: 'raw'},
             {
-                test: /\.jsx?$/,
+                test: /\.(js|jsx)$/,
                 loader: 'babel',
                 exclude: /node_modules/,
                 query: {

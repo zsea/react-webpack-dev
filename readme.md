@@ -6,6 +6,21 @@
 * less
 * react
 * ES6
+* sass
+* postcss
+
+### loaders
+
+*  babel-loader
+*  css-loader
+*  file-loader
+*   json-loader
+*   less-loader
+*   postcss-loader
+*   raw-loader
+*   sass-loader
+*   style-loader
+*   url-loader
 
 ### 目录说明
 
