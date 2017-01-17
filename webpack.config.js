@@ -10,22 +10,27 @@ for (var i = 0; i < process.argv.length; i++) {
     }
 }
 var plugins = [new HtmlwebpackPlugin({
-        title: 'Hello React',
-        template: path.resolve(__dirname, 'templates/index.ejs'),
-        inject: 'head',
-        hash: true,
-        //favicon:'' //指定favicon.ico的位置
-    })];
+    title: 'Hello React',
+    template: path.resolve(__dirname, 'templates/index.ejs'),
+    inject: 'head',
+    hash: true,
+    //favicon:'' //指定favicon.ico的位置
+})];
 plugins.push(new NpmInstallPlugin({
     cacheMin: 999999, // --cache-min=999999 (prefer NPM cached version)
-    //registry: "https://registry.npm.taobao.org",   // --registry="..."
+    registry: "https://registry.npm.taobao.org",   // --registry="..."
     save: true, // --save
     saveDev: true, // --save-dev
     saveExact: true, // --save-exact
 }));
 if (minimize) {
+    plugins.push(new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: JSON.stringify('production')
+        }
+    }))
     var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-    plugins.push(new UglifyJsPlugin({minimize: true}));
+    plugins.push(new UglifyJsPlugin({ minimize: true }));
     outputFile = 'bundle.min.js';
 } else {
     outputFile = 'bundle.js';
@@ -69,10 +74,7 @@ var config = {
             }, {
                 test: /\.(js|jsx)$/,
                 loader: 'babel',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['react', 'es2015']
-                }
+                exclude: /node_modules/
             }
         ]
     },
